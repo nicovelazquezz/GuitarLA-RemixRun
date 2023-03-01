@@ -52,7 +52,7 @@ function Post() {
     const { titulo, imagen, contenido, publishedAt } = post
 
     return (
-        <article className='contenedor post mt-3'>
+        <article className='post mt-3'>
             <img className="imagen" src={imagen?.data?.attributes?.url} alt={`imagen blog ${titulo}`} />
             <div className="contenido">
                 <h3 className="">{titulo}</h3>
