@@ -1,3 +1,4 @@
+import { useState } from 'react'
 // importar el componente para renderizar la funcion meta dentro del head
 import { 
     Meta, 
@@ -50,9 +51,52 @@ export function links() {
 }
 
 export default function App(){
+
+    const [cart, setCart] = useState([])
+    // Guitarra state es la guitarra que va a estar en memoria seteada por la funcion agregarCarrito
+    const agregarCarrito = guitarra => {
+        if(cart.some(guitarraState => guitarraState.id === guitarra.id)) {
+            // Iterar sobre el cart y encontrar el elemento duplicado. .some devuelve un booleano
+            const carritoActualizado = cart.map( guitarraState => {
+                if(guitarraState.id === guitarra.id) {
+                    // Reescribir la cantidad
+                    guitarraState.cantidad = guitarra.cantidad
+                }
+                return guitarraState
+            })
+            // Añadir al carrito y reescribirlo totalmente
+            setCart(carritoActualizado)
+        } else {
+            // Si no existe, es un registro nuevo entonces..
+            setCart([...cart, guitarra])     
+        }
+    }
+
+    const actualizarCantidad = guitarra => {
+        const carritoActualizado = cart.map(guitarraState => {
+            if(guitarraState.id === guitarra.id) {
+                guitarraState.cantidad = guitarra.cantidad
+            }
+            return guitarraState
+        })
+        setCart(carritoActualizado)
+    }
+
+    const eliminarGuitarra = id => {
+        const carritoActualizado = cart.filter( guitarraState => guitarraState.id !== id)
+        setCart(carritoActualizado)
+    }
+
     return (
             <Document>
-                <Outlet />
+                <Outlet 
+                    context={{
+                        agregarCarrito,
+                        cart,
+                        actualizarCantidad,
+                        eliminarGuitarra
+                    }}
+                />
             </Document>
     )
 }

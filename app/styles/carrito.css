@@ -1,0 +1,83 @@
+.contenido {
+    display: grid;
+    align-items: flex-start;
+    gap: 5rem;
+}
+
+@media (min-width: 768px) {
+    .contenido {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+.carrito {
+    padding: 3rem;
+}
+
+.producto {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid #cfcfcf;
+    position: relative;
+}
+
+.producto:last-of-type {
+    border-bottom: none;
+}
+
+.producto p {
+    margin: 0 0 1rem 0;
+}
+
+.select {
+    /* propiedad para eliminar todo el css */
+    all: unset;
+    border: 1px solid #cfcfcf;
+    text-align: center;
+    width: 50%;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.producto span {
+    font-weight: 900;
+    font-size: 2.8rem;
+}
+
+
+.nombre {
+    font-weight: 700;
+    font-size: 3.8rem;
+}
+
+.precio {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.subtotal {
+    font-size: 2.2rem;
+}
+
+.resumen {
+    background-color: #eee;
+    padding: 3rem;
+    border-radius: 1rem;
+    position: sticky;
+    top: 3rem;
+}
+
+.btn_Eliminar {
+    all: unset;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+}
+
+.btn_Eliminar:hover {
+    cursor: pointer;
+}
