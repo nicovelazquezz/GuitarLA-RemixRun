@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // importar el componente para renderizar la funcion meta dentro del head
 import { 
     Meta, 
@@ -52,7 +52,17 @@ export function links() {
 
 export default function App(){
 
-    const [cart, setCart] = useState([])
+    // esto de entrada da NULL entonces seteamos que si no hay nada sea un arreglo vacío
+    // la parte de remix que se ejecuta en el servidor no tiene la parte de window, le estamos diciendo que si el codigo es del servidor entonces no haga nada(null) pero si es del navegador agrega localstorage
+    const cartLS = typeof window !== 'undefined' ?  JSON.parse(localStorage.getItem('cart')) ?? [] : null
+    const [cart, setCart] = useState(cartLS)
+
+    
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
+    
+    
     // Guitarra state es la guitarra que va a estar en memoria seteada por la funcion agregarCarrito
     const agregarCarrito = guitarra => {
         if(cart.some(guitarraState => guitarraState.id === guitarra.id)) {
